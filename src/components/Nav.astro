@@ -5,9 +5,11 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 ---
-
 <header class="nav">
-  <a href="/" class="nav__logo">Studio Binnenkant</a>
+  <a href="/" class="nav__logo">
+    <img src="/images/logo.png" alt="Studio Binnenkant" class="nav__logo-icon" />
+    <span class="nav__logo-text">Studio Binnenkant</span>
+  </a>
   <nav class="nav__links">
     {navLinks.map(link => (
       <a href={link.href} class="nav__link">{link.label}</a>
@@ -32,23 +34,30 @@ const navLinks = [
     padding: 1.5rem 2.5rem;
     mix-blend-mode: difference;
   }
-
   .nav__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .nav__logo-icon {
+    height: 28px;
+    width: auto;
+    flex-shrink: 0;
+  }
+  .nav__logo-text {
     font-family: 'DM Mono', monospace;
     font-size: 0.75rem;
     font-weight: 300;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: white;
-    text-decoration: none;
   }
-
   .nav__links {
     display: flex;
     gap: 2.5rem;
     align-items: center;
   }
-
   .nav__link {
     font-family: 'DM Mono', monospace;
     font-size: 0.7rem;
@@ -59,11 +68,9 @@ const navLinks = [
     text-decoration: none;
     transition: opacity 0.2s;
   }
-
   .nav__link:hover {
     opacity: 0.5;
   }
-
   .nav__burger {
     display: none;
     flex-direction: column;
@@ -73,17 +80,18 @@ const navLinks = [
     cursor: pointer;
     padding: 4px;
   }
-
   .nav__burger span {
     display: block;
     width: 22px;
     height: 1px;
     background: white;
   }
-
   @media (max-width: 768px) {
     .nav {
       padding: 1.25rem 1.5rem;
+    }
+    .nav__logo-text {
+      display: none;
     }
     .nav__links {
       display: none;
