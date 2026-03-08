@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectGrid from '../components/ProjectGrid.astro';
+import Hero from '../components/Hero.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const projects = allProjects
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .map(p => ({
+    title: p.data.title,
+    slug: p.slug,
+    image: p.data.image,
+    category: p.data.category,
+    featured: p.data.featured ?? false,
+  }));
+---
+
+<BaseLayout title="Studio Binnenkant — Sculpturaal interieurontwerp">
+  <Hero />
+  <ProjectGrid projects={projects} />
+</BaseLayout>

@@ -1,0 +1,134 @@
+---
+---
+
+<section class="hero">
+  <img
+    src="/images/hero.webp"
+    alt="Studio Binnenkant — sculpturaal interieurontwerp"
+    class="hero__bg"
+    width="1920"
+    height="1080"
+    loading="eager"
+    decoding="async"
+  />
+  <div class="hero__overlay"></div>
+  <div class="hero__content">
+    <h1 class="hero__title">
+      Sculpturaal interieurontwerp,<br />
+      <em>architecturaal doordacht.</em>
+    </h1>
+    <p class="hero__sub">
+      Keukens en maatwerk ontworpen als ruimtelijke volumes —<br />
+      met aandacht voor verhouding, materialiteit en rust.
+    </p>
+    <a href="/contact" class="hero__cta">Interesse? Contacteer ons</a>
+  </div>
+  <div class="hero__line"></div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 2.5rem 5rem;
+    position: relative;
+    overflow: hidden;
+    background: #111;
+  }
+
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+  }
+
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.75) 0%,
+      rgba(0, 0, 0, 0.3) 50%,
+      rgba(0, 0, 0, 0.15) 100%
+    );
+    z-index: 1;
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+  }
+
+  .hero__title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: #f5f0e8;
+    margin: 0 0 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero__title em {
+    font-style: italic;
+    color: #c8b89a;
+  }
+
+  .hero__sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(245, 240, 232, 0.6);
+    letter-spacing: 0.04em;
+    margin: 0 0 2.5rem;
+  }
+
+  .hero__cta {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #0d0d0d;
+    background: #c8b89a;
+    text-decoration: none;
+    padding: 0.9rem 1.8rem;
+    transition: background 0.25s, color 0.25s;
+  }
+
+  .hero__cta:hover {
+    background: #f5f0e8;
+    color: #0d0d0d;
+  }
+
+  .hero__line {
+    position: absolute;
+    right: 2.5rem;
+    top: 30%;
+    bottom: 5rem;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(200, 184, 154, 0.3), transparent);
+    z-index: 2;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 0 1.5rem 4rem;
+    }
+    .hero__line {
+      display: none;
+    }
+    .hero__sub br {
+      display: none;
+    }
+  }
+</style>

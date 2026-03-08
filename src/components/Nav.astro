@@ -1,0 +1,95 @@
+---
+const navLinks = [
+  { label: "Projecten", href: "/" },
+  { label: "Over Studio Binnenkant", href: "/over" },
+  { label: "Contact", href: "/contact" },
+];
+---
+
+<header class="nav">
+  <a href="/" class="nav__logo">Studio Binnenkant</a>
+  <nav class="nav__links">
+    {navLinks.map(link => (
+      <a href={link.href} class="nav__link">{link.label}</a>
+    ))}
+  </nav>
+  <button class="nav__burger" aria-label="Menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2.5rem;
+    mix-blend-mode: difference;
+  }
+
+  .nav__logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+  }
+
+  .nav__links {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .nav__link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .nav__link:hover {
+    opacity: 0.5;
+  }
+
+  .nav__burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .nav__burger span {
+    display: block;
+    width: 22px;
+    height: 1px;
+    background: white;
+  }
+
+  @media (max-width: 768px) {
+    .nav {
+      padding: 1.25rem 1.5rem;
+    }
+    .nav__links {
+      display: none;
+    }
+    .nav__burger {
+      display: flex;
+    }
+  }
+</style>

@@ -1,0 +1,205 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Over Studio Binnenkant — Sculpturaal interieurontwerp Antwerpen"
+  description="Studio Binnenkant is de solopraktijk van Jens Van de Meersch. Sculpturaal interieurontwerp, keukens en maatwerk als architecturale volumes vanuit Antwerpen."
+>
+  <section class="over">
+
+    <div class="over__grid">
+      <div class="over__portrait-wrap">
+        <img
+          src="/images/portrait.webp"
+          alt="Jens Van de Meersch — Studio Binnenkant"
+          class="over__portrait"
+          width="900"
+          height="1200"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+
+      <div class="over__content">
+        <span class="over__label">Over Studio Binnenkant</span>
+        <h1 class="over__title">Architecturaal denken.<br /><em>Sculpturaal maken.</em></h1>
+
+        <div class="over__text">
+          <p>Studio Binnenkant is de solopraktijk van Jens Van de Meersch, gevestigd in de Antwerpse regio. De studio ontwerpt keukens, meubilair en interieurs die worden behandeld als architecturale volumes — met aandacht voor verhouding, materialiteit en de stilte die ontstaat wanneer alles op zijn plaats staat.</p>
+
+          <p>Elk project begint bij ruimtelijke logica: hoe beweegt iemand door een ruimte, waar valt het licht, welk object mag domineren. Pas daarna komen materiaal en kleur, als bewuste keuzes die diepte geven aan het geheel.</p>
+
+          <p>Als sologepraktijk werkt Studio Binnenkant bewust klein en precies. Niet om te imponeren, maar om te raken. Elk project krijgt de volledige aandacht — van eerste schets tot laatste detail op de werkvloer.</p>
+
+          <p>De aanpak combineert klassieke ambachtelijkheid met een hedendaagse, architecturale taal. Plywood, gelakt MDF, massief hout, beton — materialen die eerlijk zijn en mooi ouder worden.</p>
+        </div>
+
+        <div class="over__info">
+          <div class="over__info-item">
+            <span class="over__info-label">Ontwerper</span>
+            <span class="over__info-value">Jens Van de Meersch</span>
+          </div>
+          <div class="over__info-item">
+            <span class="over__info-label">Locatie</span>
+            <span class="over__info-value">Antwerpen, België</span>
+          </div>
+          <div class="over__info-item">
+            <span class="over__info-label">Specialisatie</span>
+            <span class="over__info-value">Keukens, maatmeubel, interieurbouw</span>
+          </div>
+          <div class="over__info-item">
+            <span class="over__info-label">Contact</span>
+            <span class="over__info-value"><a href="mailto:info@studio-binnenkant.be">info@studio-binnenkant.be</a></span>
+          </div>
+        </div>
+
+        <a href="/contact" class="over__cta">Een project bespreken →</a>
+      </div>
+    </div>
+
+  </section>
+</BaseLayout>
+
+<style>
+  .over {
+    background: #fff;
+    padding-top: 80px;
+    min-height: 100vh;
+  }
+
+  .over__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 80px);
+  }
+
+  .over__portrait-wrap {
+    overflow: hidden;
+    background: #e8e8e8;
+    position: sticky;
+    top: 80px;
+    height: calc(100vh - 80px);
+  }
+
+  .over__portrait {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .over__content {
+    padding: 80px 70px 80px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .over__label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 1.25rem;
+  }
+
+  .over__title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: #111;
+    margin: 0 0 2.5rem;
+  }
+
+  .over__title em {
+    font-style: italic;
+    color: #888;
+  }
+
+  .over__text {
+    margin-bottom: 2.5rem;
+  }
+
+  .over__text p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: #555;
+    margin: 0 0 1.25rem;
+  }
+
+  .over__info {
+    border-top: 1px solid #eee;
+    padding-top: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .over__info-item {
+    display: flex;
+    gap: 1.5rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f5f5f5;
+  }
+
+  .over__info-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #bbb;
+    min-width: 100px;
+  }
+
+  .over__info-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 300;
+    color: #444;
+  }
+
+  .over__info-value a {
+    color: #444;
+    text-decoration: underline;
+  }
+
+  .over__cta {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    background: #111;
+    text-decoration: none;
+    padding: 0.9rem 1.8rem;
+    align-self: flex-start;
+    transition: background 0.2s;
+  }
+
+  .over__cta:hover {
+    background: #333;
+  }
+
+  @media (max-width: 900px) {
+    .over__grid {
+      grid-template-columns: 1fr;
+    }
+    .over__portrait-wrap {
+      position: relative;
+      top: 0;
+      height: 60vw;
+      max-height: 500px;
+    }
+    .over__content {
+      padding: 50px 24px 60px;
+    }
+  }
+</style>

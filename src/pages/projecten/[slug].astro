@@ -1,0 +1,330 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  const sorted = projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  return sorted.map((project, index) => ({
+    params: { slug: project.slug },
+    props: {
+      project,
+      prev: sorted[index + 1] ?? null,
+      next: sorted[index - 1] ?? null,
+    },
+  }));
+}
+
+const { project, prev, next } = Astro.props;
+const { title, category, image, description, details, gallery, seoTitle, seoDescription } = project.data;
+const { Content } = await project.render();
+
+const heroImage = image;
+const galleryImages = gallery ?? [image, image, image, image];
+const pageTitle = seoTitle ?? `${title} — Studio Binnenkant`;
+const pageDesc = seoDescription ?? `${title} — sculpturaal interieurontwerp door Studio Binnenkant.`;
+---
+
+<BaseLayout title={pageTitle} description={pageDesc}>
+  <article class="project-detail">
+
+    <!-- Hero: 2 kolommen -->
+    <div class="project-hero">
+      <div class="project-hero__image-wrap">
+        <img
+          src={heroImage}
+          alt={title}
+          class="project-hero__image"
+          width="900"
+          height="1200"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+      <div class="project-hero__info">
+        <div class="project-hero__info-inner">
+          <span class="project-hero__category">{category}</span>
+          <h1 class="project-hero__title">{title}</h1>
+          {description && <p class="project-hero__desc">{description}</p>}
+          {details && details.length > 0 && (
+            <ul class="project-hero__details">
+              {details.map(d => <li>{d}</li>)}
+            </ul>
+          )}
+        </div>
+      </div>
+    </div>
+
+    <!-- Bodytekst uit MD -->
+    <div class="project-body">
+      <Content />
+    </div>
+
+    <!-- Gallery: 4 foto's -->
+    <div class="project-gallery">
+      {galleryImages.slice(0, 4).map((img, i) => (
+        <div class="project-gallery__item">
+          <img
+            src={img}
+            alt={`${title} — detail ${i + 1}`}
+            width="900"
+            height="1200"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      ))}
+    </div>
+
+    <!-- Pager -->
+    <nav class="project-pager" aria-label="Projectnavigatie">
+      <div class="project-pager__inner">
+        {prev ? (
+          <a href={`/projecten/${prev.slug}/`} class="project-pager__link project-pager__link--prev">
+            <span class="project-pager__arrow">←</span>
+            <span class="project-pager__label">
+              <span class="project-pager__hint">Vorig project</span>
+              <span class="project-pager__name">{prev.data.title}</span>
+            </span>
+          </a>
+        ) : <div />}
+        <a href="/" class="project-pager__all">Alle projecten</a>
+        {next ? (
+          <a href={`/projecten/${next.slug}/`} class="project-pager__link project-pager__link--next">
+            <span class="project-pager__label">
+              <span class="project-pager__hint">Volgend project</span>
+              <span class="project-pager__name">{next.data.title}</span>
+            </span>
+            <span class="project-pager__arrow">→</span>
+          </a>
+        ) : <div />}
+      </div>
+    </nav>
+
+  </article>
+</BaseLayout>
+
+<style>
+  .project-detail {
+    background: #fff;
+    padding-top: 80px; /* nav clearance */
+  }
+
+  /* ── Hero ── */
+  .project-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 90vh;
+  }
+
+  .project-hero__image-wrap {
+    overflow: hidden;
+    background: #e8e8e8;
+  }
+
+  .project-hero__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    aspect-ratio: 3 / 4;
+  }
+
+  .project-hero__info {
+    display: flex;
+    align-items: center;
+    padding: 60px 60px 60px 70px;
+    background: #fff;
+  }
+
+  .project-hero__info-inner {
+    max-width: 480px;
+  }
+
+  .project-hero__category {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 1rem;
+  }
+
+  .project-hero__title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: #111;
+    margin: 0 0 1.5rem;
+  }
+
+  .project-hero__desc {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: #555;
+    margin: 0 0 2rem;
+  }
+
+  .project-hero__details {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid #eee;
+    padding-top: 1.5rem;
+  }
+
+  .project-hero__details li {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 300;
+    color: #888;
+    letter-spacing: 0.04em;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  /* ── Body ── */
+  .project-body {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 60px 40px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: #555;
+  }
+
+  /* ── Gallery ── */
+  .project-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    padding: 0 40px 80px;
+  }
+
+  .project-gallery__item {
+    overflow: hidden;
+    background: #e8e8e8;
+    aspect-ratio: 3 / 4;
+  }
+
+  .project-gallery__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .project-gallery__item:hover img {
+    transform: scale(1.04);
+  }
+
+  /* ── Pager ── */
+  .project-pager {
+    border-top: 1px solid #eee;
+    padding: 40px;
+  }
+
+  .project-pager__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .project-pager__link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: #111;
+    transition: opacity 0.2s;
+  }
+
+  .project-pager__link:hover {
+    opacity: 0.5;
+  }
+
+  .project-pager__label {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-pager__hint {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #999;
+  }
+
+  .project-pager__name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #111;
+  }
+
+  .project-pager__arrow {
+    font-size: 1.25rem;
+    color: #999;
+  }
+
+  .project-pager__all {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    padding: 0.5rem 1.2rem;
+    transition: all 0.2s;
+  }
+
+  .project-pager__all:hover {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .project-hero {
+      grid-template-columns: 1fr;
+    }
+    .project-hero__image {
+      aspect-ratio: 4 / 3;
+      height: auto;
+    }
+    .project-hero__info {
+      padding: 40px 24px;
+    }
+    .project-gallery {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 0 20px 60px;
+    }
+    .project-pager {
+      padding: 30px 20px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .project-gallery {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3px;
+    }
+    .project-body {
+      padding: 40px 20px;
+    }
+  }
+</style>

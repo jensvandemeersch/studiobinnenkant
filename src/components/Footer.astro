@@ -1,0 +1,117 @@
+---
+---
+
+<footer class="footer">
+  <div class="footer__top">
+    <div class="footer__brand">
+      <span class="footer__name">Studio Binnenkant</span>
+      <p class="footer__tagline">Sculpturaal interieurontwerp,<br />architecturaal doordacht.</p>
+    </div>
+    <nav class="footer__nav">
+      <a href="/projecten">Projecten</a>
+      <a href="/over">Over Studio Binnenkant</a>
+      <a href="/contact">Contact</a>
+    </nav>
+    <div class="footer__contact">
+      <a href="mailto:info@studio-binnenkant.be">info@studio-binnenkant.be</a>
+      <a href="https://www.instagram.com/jensvandemeersch" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© Studio Binnenkant 2026 · VOF Van de Meersch · BE 0882.341.197</span>
+    <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: #111;
+    color: rgba(245, 240, 232, 0.6);
+    padding: 4rem 2.5rem 2rem;
+  }
+
+  .footer__top {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 2rem;
+  }
+
+  .footer__name {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: #f5f0e8;
+    margin-bottom: 0.75rem;
+  }
+
+  .footer__tagline {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 300;
+    line-height: 1.8;
+    letter-spacing: 0.04em;
+    color: rgba(245, 240, 232, 0.35);
+    margin: 0;
+  }
+
+  .footer__nav,
+  .footer__contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding-top: 0.2rem;
+  }
+
+  .footer__nav a,
+  .footer__contact a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    color: rgba(245, 240, 232, 0.55);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer__nav a:hover,
+  .footer__contact a:hover {
+    color: #f5f0e8;
+  }
+
+  .footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    color: rgba(245, 240, 232, 0.25);
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .footer__bottom a {
+    color: rgba(245, 240, 232, 0.25);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer__bottom a:hover {
+    color: rgba(245, 240, 232, 0.55);
+  }
+
+  @media (max-width: 768px) {
+    .footer {
+      padding: 3rem 1.5rem 2rem;
+    }
+    .footer__top {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>

@@ -1,0 +1,273 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact — Studio Binnenkant"
+  description="Neem contact op met Studio Binnenkant voor een gesprek over uw interieurproject. Sculpturaal interieurontwerp vanuit Antwerpen."
+>
+  <section class="contact">
+    <div class="contact__grid">
+
+      <div class="contact__info">
+        <span class="contact__label">Contact</span>
+        <h1 class="contact__title">Een project<br /><em>bespreken?</em></h1>
+        <p class="contact__intro">Vertel ons over uw ruimte en wat u zoekt. We nemen binnen 2 werkdagen contact op.</p>
+
+        <div class="contact__details">
+          <div class="contact__detail-item">
+            <span class="contact__detail-label">Email</span>
+            <a href="mailto:info@studio-binnenkant.be" class="contact__detail-value">info@studio-binnenkant.be</a>
+          </div>
+          <div class="contact__detail-item">
+            <span class="contact__detail-label">Locatie</span>
+            <span class="contact__detail-value">Antwerpen, België</span>
+          </div>
+          <div class="contact__detail-item">
+            <span class="contact__detail-label">Instagram</span>
+            <a href="https://instagram.com/jensvandemeersch" target="_blank" rel="noopener" class="contact__detail-value">@jensvandemeersch</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact__form-wrap">
+        <form
+          class="contact__form"
+          id="contactForm"
+          action="https://formsubmit.co/jensvandemeersch@gmail.com"
+          method="POST"
+        >
+          <!-- FormSubmit config -->
+          <input type="hidden" name="_subject" value="Nieuwe aanvraag via Studio Binnenkant" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_next" value="https://studio-binnenkant.be/bedankt" />
+          <input type="text" name="_honey" style="display:none" />
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="naam">Naam</label>
+              <input type="text" id="naam" name="naam" placeholder="Uw naam" required />
+            </div>
+            <div class="form-field">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" placeholder="uw@email.be" required />
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="project">Type project</label>
+            <select id="project" name="project">
+              <option value="">Selecteer een type</option>
+              <option value="Keuken">Keuken</option>
+              <option value="Maatmeubel">Maatmeubel</option>
+              <option value="Interieur">Volledig interieur</option>
+              <option value="Andere">Andere</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="bericht">Uw project</label>
+            <textarea id="bericht" name="bericht" rows="6" placeholder="Beschrijf uw ruimte, stijl en wensen..." required></textarea>
+          </div>
+
+          <button type="submit" class="form-submit">Verstuur aanvraag</button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact {
+    background: #fff;
+    padding-top: 80px;
+    min-height: 100vh;
+  }
+
+  .contact__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 80px);
+  }
+
+  .contact__info {
+    background: #111;
+    padding: 80px 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .contact__label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 1.25rem;
+  }
+
+  .contact__title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 3.75rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: #f5f0e8;
+    margin: 0 0 1.75rem;
+  }
+
+  .contact__title em {
+    font-style: italic;
+    color: #c8b89a;
+  }
+
+  .contact__intro {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: rgba(245, 240, 232, 0.5);
+    margin: 0 0 3rem;
+  }
+
+  .contact__details {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 1.5rem;
+  }
+
+  .contact__detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .contact__detail-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+  }
+
+  .contact__detail-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: rgba(245, 240, 232, 0.75);
+    text-decoration: none;
+  }
+
+  .contact__detail-value:hover {
+    color: #f5f0e8;
+  }
+
+  /* ── Form ── */
+  .contact__form-wrap {
+    padding: 80px 70px;
+    display: flex;
+    align-items: center;
+    background: #fafafa;
+  }
+
+  .contact__form {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .form-field label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #999;
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: #111;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 0.75rem 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+    width: 100%;
+  }
+
+  .form-field input::placeholder,
+  .form-field textarea::placeholder {
+    color: #ccc;
+  }
+
+  .form-field input:focus,
+  .form-field select:focus,
+  .form-field textarea:focus {
+    border-color: #111;
+  }
+
+  .form-field textarea {
+    resize: vertical;
+    min-height: 140px;
+  }
+
+  .form-submit {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    background: #111;
+    border: none;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.2s;
+  }
+
+  .form-submit:hover {
+    background: #333;
+  }
+
+  @media (max-width: 900px) {
+    .contact__grid {
+      grid-template-columns: 1fr;
+    }
+    .contact__info {
+      padding: 60px 24px;
+    }
+    .contact__form-wrap {
+      padding: 50px 24px 60px;
+    }
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
