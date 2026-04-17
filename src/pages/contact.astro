@@ -4,7 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout
   title="Contact — Studio Binnenkant"
-  description="Neem contact op met Studio Binnenkant voor een gesprek over uw interieurproject. Sculpturaal interieurontwerp vanuit Antwerpen."
+  description="Vertel Studio Binnenkant over je ruimte en je project. Interieurontwerp van concept tot installatie, vanuit de Antwerpse regio."
 >
   <section class="contact">
     <div class="contact__grid">
@@ -12,16 +12,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="contact__info">
         <span class="contact__label">Contact</span>
         <h1 class="contact__title">Een project<br /><em>bespreken?</em></h1>
-        <p class="contact__intro">Vertel ons over uw ruimte en wat u zoekt. We nemen binnen 2 werkdagen contact op.</p>
+        <p class="contact__intro">Vertel me over de ruimte en wat je zoekt. Ik kom terug zodra ik het gelezen heb.</p>
 
         <div class="contact__details">
           <div class="contact__detail-item">
             <span class="contact__detail-label">Email</span>
-            <a href="mailto:info@studio-binnenkant.be" class="contact__detail-value">info@studio-binnenkant.be</a>
-          </div>
-          <div class="contact__detail-item">
-            <span class="contact__detail-label">Locatie</span>
-            <span class="contact__detail-value">Antwerpen, België</span>
+            <span class="contact__detail-value">info@studio-binnenkant.be</span>
           </div>
           <div class="contact__detail-item">
             <span class="contact__detail-label">Instagram</span>
@@ -47,11 +43,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="form-row">
             <div class="form-field">
               <label for="naam">Naam</label>
-              <input type="text" id="naam" name="naam" placeholder="Uw naam" required />
+              <input type="text" id="naam" name="naam" placeholder="Naam" required />
             </div>
             <div class="form-field">
               <label for="email">E-mail</label>
-              <input type="email" id="email" name="email" placeholder="uw@email.be" required />
+              <input type="email" id="email" name="email" placeholder="E-mailadres" required />
             </div>
           </div>
 
@@ -67,11 +63,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
 
           <div class="form-field">
-            <label for="bericht">Uw project</label>
-            <textarea id="bericht" name="bericht" rows="6" placeholder="Beschrijf uw ruimte, stijl en wensen..." required></textarea>
+            <label for="bericht">Het project</label>
+            <textarea id="bericht" name="bericht" rows="6" placeholder="De ruimte, het vraagstuk, de context." required></textarea>
           </div>
 
-          <button type="submit" class="form-submit">Verstuur aanvraag</button>
+          <button type="submit" class="form-submit">Verstuur</button>
         </form>
       </div>
 
@@ -261,13 +257,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       grid-template-columns: 1fr;
     }
     .contact__info {
-      padding: 60px 24px;
+      padding: 48px 24px 40px;
+    }
+    .contact__title {
+      font-size: clamp(2rem, 9vw, 3rem);
+    }
+    .contact__intro {
+      margin-bottom: 2rem;
     }
     .contact__form-wrap {
-      padding: 50px 24px 60px;
+      padding: 40px 24px 60px;
+      align-items: flex-start;
     }
     .form-row {
       grid-template-columns: 1fr;
+    }
+    .form-submit {
+      padding: 1.1rem 2rem;
     }
   }
 </style>

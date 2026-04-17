@@ -1,14 +1,16 @@
 ---
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import ImageProtect from '../components/ImageProtect.astro';
 import '../styles/global.css';
 
 interface Props {
   title: string;
   description?: string;
+  robots?: string;
 }
 
-const { title, description = "Studio Binnenkant — Sculpturaal interieurontwerp, architecturaal doordacht. Keukens en maatwerk ontworpen als ruimtelijke volumes." } = Astro.props;
+const { title, description = "Studio Binnenkant — Interieurontwerp als architecturaal volume. Van concept tot installatie, vanuit de Antwerpse regio.", robots = "index, follow" } = Astro.props;
 ---
 
 <!doctype html>
@@ -17,17 +19,44 @@ const { title, description = "Studio Binnenkant — Sculpturaal interieurontwerp
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={robots} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="nl_BE" />
+    <meta property="og:image" content="https://studio-binnenkant.be/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://studio-binnenkant.be/og-image.jpg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="canonical" href={Astro.url.href} />
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" /></noscript>
+
+    <!-- Meta Pixel -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1177975397285451');
+      fbq('track', 'PageView');
+    </script>
+    <noscript>
+      <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=1177975397285451&ev=PageView&noscript=1" />
+    </noscript>
+    <!-- Einde Meta Pixel -->
   </head>
   <body>
     <Nav />
@@ -35,5 +64,6 @@ const { title, description = "Studio Binnenkant — Sculpturaal interieurontwerp
       <slot />
     </main>
     <Footer />
+    <ImageProtect />
   </body>
 </html>

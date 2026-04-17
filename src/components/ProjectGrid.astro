@@ -44,7 +44,7 @@ const { projects } = Astro.props;
 <style>
   .projects {
     background: #fff;
-    padding: 80px 80px 140px;
+    padding: 60px 60px 100px;
     max-width: 1600px;
     margin: 0 auto;
   }
@@ -52,7 +52,7 @@ const { projects } = Astro.props;
   .projects__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 90px 60px;
+    gap: 60px 40px;
   }
 
   .project-card {
@@ -65,7 +65,7 @@ const { projects } = Astro.props;
     overflow: hidden;
     aspect-ratio: 3 / 4;
     background: #e8e8e8;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
   }
 
   .project-card__image {
@@ -104,32 +104,29 @@ const { projects } = Astro.props;
     white-space: nowrap;
   }
 
-  @media (max-width: 1100px) {
-    .projects {
-      padding: 60px 60px 100px;
-    }
-    .projects__grid {
-      gap: 70px 40px;
-    }
-  }
-
   @media (max-width: 900px) {
     .projects {
-      padding: 40px 40px 80px;
+      padding: 40px 20px 70px;
     }
     .projects__grid {
       grid-template-columns: repeat(2, 1fr);
-      gap: 50px 30px;
+      gap: 32px 16px;
+    }
+    .project-card__title {
+      font-size: 0.9rem;
+    }
+    .project-card__link {
+      display: none;
     }
   }
 
-  @media (max-width: 560px) {
+  @media (max-width: 480px) {
     .projects {
-      padding: 30px 24px 60px;
+      padding: 24px 16px 60px;
     }
     .projects__grid {
       grid-template-columns: repeat(2, 1fr);
-      gap: 36px 18px;
+      gap: 24px 12px;
     }
   }
 </style>

@@ -1,0 +1,260 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const faqs = [
+  {
+    vraag: "Werk je ook buiten de Antwerpse regio?",
+    antwoord: "Ja. Projecten in Gent, Brussel, de kust en Nederland behoren tot ons werkgebied. Bij grotere afstand wordt de plaatsing in overleg gepland."
+  },
+  {
+    vraag: "Werk je met een vast budget of op bestek?",
+    antwoord: "Elk project begint met een ontwerpopdracht. Pas wanneer het ontwerp concreet is, wordt een gedetailleerde prijsopgave opgesteld — zodat je een prijs krijgt voor wat er werkelijk gebouwd wordt, niet voor een gemiddelde."
+  },
+  {
+    vraag: "Hoe lang duurt een project van eerste gesprek tot oplevering?",
+    antwoord: "Dat varieert van 3 tot 8 maanden afhankelijk van de complexiteit. Ontwerp, productie en plaatsing verlopen in sequence — niet in parallel. We bouwen niets voor we er zeker van zijn dat het klopt."
+  },
+  {
+    vraag: "Neem je elk project aan?",
+    antwoord: "Nee. Studio Binnenkant neemt per jaar een beperkt aantal projecten aan om kwaliteit en opvolging te garanderen. Een eerste gesprek bepaalt of er een goede match is."
+  },
+  {
+    vraag: "Kan ik ook enkel het ontwerp aanvragen, zonder productie?",
+    antwoord: "Nee. Ontwerp en productie zijn onlosmakelijk verbonden in onze werkwijze. De kwaliteit van het eindresultaat staat of valt met die continuïteit."
+  },
+  {
+    vraag: "Maken jullie ook badkamers en slaapkamers, of alleen keukens?",
+    antwoord: "We ontwerpen en realiseren alles wat een architecturaal vraagstuk stelt — keukens, maatmeubilair, badkamers, roomdividers, werkkamers. Geen losstaande stukken, wel samenhangende interieurs."
+  },
+  {
+    vraag: "Waarom tonen jullie alleen renders en geen foto's van gerealiseerde projecten?",
+    antwoord: "Studio Binnenkant is een ontwerpbureau dat ook uitvoert — de renders zijn het ontwerp. Foto's van realisaties veronderstellen een gestyled interieur om de compositie intact te houden, en die controle over de eindbeelden hebben we niet altijd. We tonen liever het ontwerp in zijn zuiverste vorm dan een foto die de balans verstoort."
+  },
+  {
+    vraag: "Is er een showroom?",
+    antwoord: "Nee. Elk project begint met een gesprek op locatie — in jouw ruimte, niet in een toonzaal."
+  },
+  {
+    vraag: "Hoe verloopt het eerste contact?",
+    antwoord: "Je stuurt een bericht via het contactformulier met een korte omschrijving van de ruimte en het vraagstuk. Als er een match lijkt te zijn, plannen we een eerste gesprek op locatie."
+  }
+];
+---
+
+<BaseLayout
+  title="FAQ — Studio Binnenkant"
+  description="Veelgestelde vragen over de werkwijze, planning en projecten van Studio Binnenkant. Interieurontwerp van concept tot installatie."
+>
+  <section class="faq">
+    <div class="faq__grid">
+
+      <div class="faq__intro">
+        <span class="faq__label">Veelgestelde vragen</span>
+        <h1 class="faq__title">Hoe werkt<br /><em>Studio Binnenkant?</em></h1>
+        <p class="faq__sub">Antwoorden op de meest gestelde vragen over werkwijze, planning en samenwerking.</p>
+        <a href="/contact" class="faq__cta">Een project bespreken →</a>
+      </div>
+
+      <div class="faq__list">
+        {faqs.map((item, i) => (
+          <details class="faq__item">
+            <summary class="faq__question">
+              <span>{item.vraag}</span>
+              <span class="faq__icon">+</span>
+            </summary>
+            <p class="faq__answer">{item.antwoord}</p>
+          </details>
+        ))}
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .faq {
+    background: #fff;
+    padding-top: 80px;
+    min-height: 100vh;
+  }
+
+  .faq__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    min-height: calc(100vh - 80px);
+    align-items: start;
+  }
+
+  /* INTRO */
+  .faq__intro {
+    background: #111;
+    padding: 80px 60px;
+    position: sticky;
+    top: 80px;
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .faq__label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 1.25rem;
+  }
+
+  .faq__title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: #f5f0e8;
+    margin: 0 0 1.5rem;
+  }
+
+  .faq__title em {
+    font-style: italic;
+    color: #c8b89a;
+  }
+
+  .faq__sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: rgba(245, 240, 232, 0.45);
+    margin: 0 0 3rem;
+  }
+
+  .faq__cta {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #111;
+    background: #f5f0e8;
+    text-decoration: none;
+    padding: 0.9rem 1.8rem;
+    align-self: flex-start;
+    transition: background 0.2s;
+  }
+
+  .faq__cta:hover {
+    background: #c8b89a;
+  }
+
+  /* FAQ LIST */
+  .faq__list {
+    padding: 80px 70px 80px 80px;
+  }
+
+  .faq__item {
+    border-bottom: 1px solid #eee;
+  }
+
+  .faq__item:first-child {
+    border-top: 1px solid #eee;
+  }
+
+  .faq__question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.5rem 0;
+    cursor: pointer;
+    list-style: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: #111;
+    transition: color 0.2s;
+  }
+
+  .faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__question:hover {
+    color: #6b5c45;
+  }
+
+  .faq__icon {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: #bbb;
+    flex-shrink: 0;
+    transition: transform 0.25s, color 0.2s;
+    line-height: 1;
+  }
+
+  .faq__item[open] .faq__icon {
+    transform: rotate(45deg);
+    color: #6b5c45;
+  }
+
+  .faq__item[open] .faq__question {
+    color: #6b5c45;
+  }
+
+  .faq__answer {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: #666;
+    margin: 0 0 1.5rem;
+    padding-right: 2rem;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .faq__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .faq__intro {
+      position: relative;
+      top: 0;
+      height: auto;
+      padding: 48px 24px 40px;
+    }
+
+    .faq__title {
+      font-size: clamp(1.75rem, 7vw, 2.5rem);
+    }
+
+    .faq__cta {
+      width: 100%;
+      text-align: center;
+    }
+
+    .faq__list {
+      padding: 40px 24px 60px;
+    }
+  }
+</style>
+
+<script>
+  // Sluit andere items als je een nieuw item opent
+  const items = document.querySelectorAll('.faq__item');
+  items.forEach(item => {
+    item.addEventListener('toggle', () => {
+      if ((item as HTMLDetailsElement).open) {
+        items.forEach(other => {
+          if (other !== item) {
+            (other as HTMLDetailsElement).open = false;
+          }
+        });
+      }
+    });
+  });
+</script>

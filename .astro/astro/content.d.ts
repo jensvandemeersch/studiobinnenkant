@@ -141,107 +141,100 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"projects": {
-"keuken-gent-1.md": {
-	id: "keuken-gent-1.md";
-  slug: "keuken-gent-1";
+"bureaumeubel-turnhout-BK.md": {
+	id: "bureaumeubel-turnhout-BK.md";
+  slug: "bureaumeubel-turnhout-bk";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"keuken-gent-2.md": {
-	id: "keuken-gent-2.md";
-  slug: "keuken-gent-2";
+"keuken-borgerhout-AJ.md": {
+	id: "keuken-borgerhout-AJ.md";
+  slug: "keuken-borgerhout-aj";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"keuken-hove.md": {
-	id: "keuken-hove.md";
-  slug: "keuken-hove";
+"keuken-gent-FM.md": {
+	id: "keuken-gent-FM.md";
+  slug: "keuken-gent-fm";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"keuken-koersel.md": {
-	id: "keuken-koersel.md";
-  slug: "keuken-koersel";
+"keuken-gent-TK.md": {
+	id: "keuken-gent-TK.md";
+  slug: "keuken-gent-tk";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"keuken-laken.md": {
-	id: "keuken-laken.md";
-  slug: "keuken-laken";
+"keuken-hove-CA.md": {
+	id: "keuken-hove-CA.md";
+  slug: "keuken-hove-ca";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"keuken-mechelen-1.md": {
-	id: "keuken-mechelen-1.md";
-  slug: "keuken-mechelen-1";
+"keuken-koersel-YB.md": {
+	id: "keuken-koersel-YB.md";
+  slug: "keuken-koersel-yb";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"keuken-mechelen-2.md": {
-	id: "keuken-mechelen-2.md";
-  slug: "keuken-mechelen-2";
+"keuken-mechelen-PM.md": {
+	id: "keuken-mechelen-PM.md";
+  slug: "keuken-mechelen-pm";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"keuken-nieuwpoort-1.md": {
-	id: "keuken-nieuwpoort-1.md";
-  slug: "keuken-nieuwpoort-1";
+"keuken-mechelen-TK.md": {
+	id: "keuken-mechelen-TK.md";
+  slug: "keuken-mechelen-tk";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"keuken-nieuwpoort-2.md": {
-	id: "keuken-nieuwpoort-2.md";
-  slug: "keuken-nieuwpoort-2";
+"keuken-nieuwpoort-TS.md": {
+	id: "keuken-nieuwpoort-TS.md";
+  slug: "keuken-nieuwpoort-ts";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"keuken-oostende.md": {
-	id: "keuken-oostende.md";
-  slug: "keuken-oostende";
+"keuken-oostende-WA.md": {
+	id: "keuken-oostende-WA.md";
+  slug: "keuken-oostende-wa";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"keuken-zaventem.md": {
-	id: "keuken-zaventem.md";
-  slug: "keuken-zaventem";
+"keuken-sint-amandsberg-GD.md": {
+	id: "keuken-sint-amandsberg-GD.md";
+  slug: "keuken-sint-amandsberg-gd";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"meubel-dendermonde.md": {
-	id: "meubel-dendermonde.md";
-  slug: "meubel-dendermonde";
+"keuken-zaventem-WA.md": {
+	id: "keuken-zaventem-WA.md";
+  slug: "keuken-zaventem-wa";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"meubel-hingene.md": {
-	id: "meubel-hingene.md";
-  slug: "meubel-hingene";
+"room-divider-dendermonde-BJ.md": {
+	id: "room-divider-dendermonde-BJ.md";
+  slug: "room-divider-dendermonde-bj";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"meubel-lichtaart.md": {
-	id: "meubel-lichtaart.md";
-  slug: "meubel-lichtaart";
-  body: string;
-  collection: "projects";
-  data: InferEntrySchema<"projects">
-} & { render(): Render[".md"] };
-"meubel-turnhout.md": {
-	id: "meubel-turnhout.md";
-  slug: "meubel-turnhout";
+"zitmeubel-lichtaart-MB.md": {
+	id: "zitmeubel-lichtaart-MB.md";
+  slug: "zitmeubel-lichtaart-mb";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">

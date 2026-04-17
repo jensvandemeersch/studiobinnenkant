@@ -3,8 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="Over Studio Binnenkant — Sculpturaal interieurontwerp Antwerpen"
-  description="Studio Binnenkant is de solopraktijk van Jens Van de Meersch. Sculpturaal interieurontwerp, keukens en maatwerk als architecturale volumes vanuit Antwerpen."
+  title="Interieurontwerp op maat — Studio Binnenkant, Antwerpen"
+  description="Studio Binnenkant is de solopraktijk van Jens Van de Meersch. Interieurontwerp als architecturaal volume — van concept tot installatie, vanuit de Antwerpse regio."
 >
   <section class="over">
 
@@ -26,33 +26,52 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h1 class="over__title">Architecturaal denken.<br /><em>Sculpturaal maken.</em></h1>
 
         <div class="over__text">
-          <p>Studio Binnenkant is de solopraktijk van Jens Van de Meersch, gevestigd in de Antwerpse regio. De studio ontwerpt keukens, meubilair en interieurs die worden behandeld als architecturale volumes — met aandacht voor verhouding, materialiteit en de stilte die ontstaat wanneer alles op zijn plaats staat.</p>
+          <p>Studio Binnenkant is de ontwerpstudio van Jens Van de Meersch, gevestigd in de Antwerpse regio. De studio ontwerpt en realiseert keukens, meubilair en interieurs die worden behandeld als architecturale volumes — met aandacht voor verhouding, materialiteit en wat een ruimte architecturaal samenhangend maakt.</p>
 
-          <p>Elk project begint bij ruimtelijke logica: hoe beweegt iemand door een ruimte, waar valt het licht, welk object mag domineren. Pas daarna komen materiaal en kleur, als bewuste keuzes die diepte geven aan het geheel.</p>
+          <p>Elk project begint bij ruimtelijke logica: hoe beweegt iemand door een ruimte, waar valt het licht, welk object mag domineren. Pas daarna komen materiaal en kleur, als consequenties van die ruimtelijke beslissingen — niet als vertrekpunt.</p>
 
-          <p>Als sologepraktijk werkt Studio Binnenkant bewust klein en precies. Niet om te imponeren, maar om te raken. Elk project krijgt de volledige aandacht — van eerste schets tot laatste detail op de werkvloer.</p>
+          <p>Ontwerp en productie vormen één geheel. Elk stuk wordt in eigen atelier vervaardigd en door de studio zelf geplaatst — van concept tot installatie op locatie, zonder tussenschakels.</p>
 
-          <p>De aanpak combineert klassieke ambachtelijkheid met een hedendaagse, architecturale taal. Plywood, gelakt MDF, massief hout, beton — materialen die eerlijk zijn en mooi ouder worden.</p>
+          <p>Jens Van de Meersch is opgeleid als meester in de beeldende kunst aan LUCA Gent. Zijn achtergrond als kunstschilder en vormgever, gecombineerd met ervaring in interieur, houtbewerking en meubelbouw, vormt de basis van een aanpak die klassieke ambachtelijkheid verbindt met een hedendaagse, architecturale taal.</p>
+		  
+		      <p>Studio Binnenkant werkt bewust klein en precies — wat interieurs oplevert die niet ingericht aanvoelen, maar ontworpen. De studio neemt elk jaar een beperkt aantal projecten aan.</p>
+
+          <div class="over__process">
+            <span class="over__process-label">Werkwijze</span>
+            <ol class="over__process-steps">
+              <li>
+                <span class="over__step-num">01</span>
+                <div>
+                  <strong>Eerste gesprek</strong>
+                  Kennismaking op locatie. De ruimte wordt bekeken, het vraagstuk besproken, een eerste architecturaal kader geschetst.
+                </div>
+              </li>
+              <li>
+                <span class="over__step-num">02</span>
+                <div>
+                  <strong>Ontwerp</strong>
+                  Concept uitgewerkt in tekeningen, renders en materiaalstalen. Ruimtelijke logica eerst, materiaal en kleur als consequentie.
+                </div>
+              </li>
+              <li>
+                <span class="over__step-num">03</span>
+                <div>
+                  <strong>Productie</strong>
+                  Alles vervaardigd in eigen atelier. Geen externe producenten, geen tussenschakels.
+                </div>
+              </li>
+              <li>
+                <span class="over__step-num">04</span>
+                <div>
+                  <strong>Plaatsing</strong>
+                  Installatie door de studio zelf. Één aanspreekpunt van eerste schets tot laatste detail op locatie.
+                </div>
+              </li>
+            </ol>
+          </div>
         </div>
 
-        <div class="over__info">
-          <div class="over__info-item">
-            <span class="over__info-label">Ontwerper</span>
-            <span class="over__info-value">Jens Van de Meersch</span>
-          </div>
-          <div class="over__info-item">
-            <span class="over__info-label">Locatie</span>
-            <span class="over__info-value">Antwerpen, België</span>
-          </div>
-          <div class="over__info-item">
-            <span class="over__info-label">Specialisatie</span>
-            <span class="over__info-value">Keukens, maatmeubel, interieurbouw</span>
-          </div>
-          <div class="over__info-item">
-            <span class="over__info-label">Contact</span>
-            <span class="over__info-value"><a href="mailto:info@studio-binnenkant.be">info@studio-binnenkant.be</a></span>
-          </div>
-        </div>
+        <div class="over__divider"></div>
 
         <a href="/contact" class="over__cta">Een project bespreken →</a>
       </div>
@@ -125,6 +144,66 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin-bottom: 2.5rem;
   }
 
+  .over__process {
+    border-top: 1px solid #eee;
+    padding-top: 2rem;
+    margin-top: 0.5rem;
+  }
+
+  .over__process-label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    font-weight: 300;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #bbb;
+    margin-bottom: 1.5rem;
+  }
+
+  .over__process-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .over__process-steps li {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .over__step-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 300;
+    color: #bbb;
+    letter-spacing: 0.08em;
+    padding-top: 0.15rem;
+  }
+
+  .over__process-steps strong {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: #111;
+    margin-bottom: 0.25rem;
+  }
+
+  .over__process-steps div {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: #777;
+  }
+
   .over__text p {
     font-family: 'DM Mono', monospace;
     font-size: 0.78rem;
@@ -134,39 +213,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0 0 1.25rem;
   }
 
-  .over__info {
+  .over__divider {
     border-top: 1px solid #eee;
-    padding-top: 1.5rem;
     margin-bottom: 2.5rem;
-  }
-
-  .over__info-item {
-    display: flex;
-    gap: 1.5rem;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #f5f5f5;
-  }
-
-  .over__info-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    font-weight: 300;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #bbb;
-    min-width: 100px;
-  }
-
-  .over__info-value {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    font-weight: 300;
-    color: #444;
-  }
-
-  .over__info-value a {
-    color: #444;
-    text-decoration: underline;
   }
 
   .over__cta {
@@ -195,11 +244,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .over__portrait-wrap {
       position: relative;
       top: 0;
-      height: 60vw;
-      max-height: 500px;
+      height: 75vw;
+      max-height: 480px;
     }
     .over__content {
-      padding: 50px 24px 60px;
+      padding: 40px 24px 60px;
+      justify-content: flex-start;
+    }
+    .over__title {
+      font-size: clamp(1.75rem, 7vw, 2.5rem);
+      margin-bottom: 1.75rem;
+    }
+    .over__cta {
+      width: 100%;
+      text-align: center;
     }
   }
 </style>

@@ -18,12 +18,11 @@
       <em>architecturaal doordacht.</em>
     </h1>
     <p class="hero__sub">
-      Keukens en maatwerk ontworpen als ruimtelijke volumes —<br />
-      met aandacht voor verhouding, materialiteit en rust.
+      Interieurs ontworpen als architecturale volumes —<br />
+      van concept tot installatie.
     </p>
-    <a href="/contact" class="hero__cta">Interesse? Contacteer ons</a>
+    <a href="/contact" class="hero__cta">Een project bespreken</a>
   </div>
-  <div class="hero__line"></div>
 </section>
 
 <style>
@@ -51,12 +50,18 @@
   .hero__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      to top,
-      rgba(245, 240, 232, 0.85) 0%,
-      rgba(245, 240, 232, 0.4) 50%,
-      rgba(245, 240, 232, 0.15) 100%
-    );
+    background:
+      linear-gradient(
+        to right,
+        rgba(245, 240, 232, 0) 55%,
+        rgba(245, 240, 232, 0.55) 100%
+      ),
+      linear-gradient(
+        to top,
+        rgba(245, 240, 232, 0.85) 0%,
+        rgba(245, 240, 232, 0.4) 50%,
+        rgba(245, 240, 232, 0.05) 100%
+      );
     z-index: 1;
   }
 
@@ -110,25 +115,27 @@
     color: #f5f0e8;
   }
 
-  .hero__line {
-    position: absolute;
-    right: 2.5rem;
-    top: 30%;
-    bottom: 5rem;
-    width: 1px;
-    background: linear-gradient(to bottom, transparent, rgba(107, 92, 69, 0.3), transparent);
-    z-index: 2;
-  }
-
   @media (max-width: 768px) {
     .hero {
-      padding: 0 1.5rem 4rem;
+      padding: 0 1.5rem 3rem;
     }
-    .hero__line {
-      display: none;
+
+    .hero__bg {
+      object-position: 35% center;
     }
+
     .hero__sub br {
       display: none;
+    }
+
+    .hero__title {
+      font-size: clamp(2rem, 10vw, 3rem);
+    }
+
+    .hero__cta {
+      width: 100%;
+      text-align: center;
+      padding: 1rem;
     }
   }
 </style>

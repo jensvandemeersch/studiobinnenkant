@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Pagina niet gevonden — Studio Binnenkant"
+  robots="noindex, nofollow"
+>
+  <section class="notfound">
+    <div class="notfound__content">
+      <span class="notfound__code">404</span>
+      <h1 class="notfound__title">Deze pagina<br /><em>bestaat niet.</em></h1>
+      <p class="notfound__text">De pagina die je zoekt is verplaatst of bestaat niet meer.</p>
+      <a href="/" class="notfound__cta">Bekijk alle projecten</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 40px;
+    background: #f8f5f0;
+  }
+
+  .notfound__content {
+    max-width: 480px;
+    text-align: center;
+  }
+
+  .notfound__code {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #bbb;
+    margin-bottom: 1.5rem;
+  }
+
+  .notfound__title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: #111;
+    margin: 0 0 1.5rem;
+  }
+
+  .notfound__title em {
+    font-style: italic;
+    color: #888;
+  }
+
+  .notfound__text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: #999;
+    letter-spacing: 0.04em;
+    margin: 0 0 2.5rem;
+  }
+
+  .notfound__cta {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #f5f0e8;
+    background: #111;
+    text-decoration: none;
+    padding: 0.9rem 1.8rem;
+    transition: background 0.2s;
+  }
+
+  .notfound__cta:hover {
+    background: #333;
+  }
+</style>

@@ -6,17 +6,16 @@ import { getCollection } from 'astro:content';
 
 const allProjects = await getCollection('projects');
 const projects = allProjects
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
   .map(p => ({
     title: p.data.title,
     slug: p.slug,
     image: p.data.image,
     category: p.data.category,
-    featured: p.data.featured ?? false,
   }));
 ---
 
-<BaseLayout title="Studio Binnenkant — Sculpturaal interieurontwerp">
+<BaseLayout title="Studio Binnenkant — Interieurontwerp op maat, Antwerpen">
   <Hero />
   <ProjectGrid projects={projects} />
 </BaseLayout>

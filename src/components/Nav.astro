@@ -1,13 +1,14 @@
 ---
 const navLinks = [
   { label: "Projecten", href: "/" },
-  { label: "Over Studio Binnenkant", href: "/over" },
+  { label: "Over", href: "/over" },
+  { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
 ];
 ---
 <header class="nav">
   <a href="/" class="nav__logo">
-    <img src="/images/logo.png" alt="Studio Binnenkant" class="nav__logo-icon" />
+    <img src="/images/logo.webp" alt="Studio Binnenkant" class="nav__logo-icon" />
     <span class="nav__logo-text">Studio Binnenkant</span>
   </a>
   <nav class="nav__links">
@@ -32,45 +33,53 @@ const navLinks = [
     align-items: center;
     justify-content: space-between;
     padding: 1.5rem 2.5rem;
-    mix-blend-mode: difference;
+    background: #f8f5f0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
   }
+
   .nav__logo {
     display: flex;
     align-items: center;
     gap: 10px;
     text-decoration: none;
   }
+
   .nav__logo-icon {
     height: 28px;
     width: auto;
     flex-shrink: 0;
   }
+
   .nav__logo-text {
     font-family: 'DM Mono', monospace;
     font-size: 0.75rem;
     font-weight: 300;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: white;
+    color: #111;
   }
+
   .nav__links {
     display: flex;
     gap: 2.5rem;
     align-items: center;
   }
+
   .nav__link {
     font-family: 'DM Mono', monospace;
     font-size: 0.7rem;
     font-weight: 300;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: white;
+    color: #111;
     text-decoration: none;
     transition: opacity 0.2s;
   }
+
   .nav__link:hover {
     opacity: 0.5;
   }
+
   .nav__burger {
     display: none;
     flex-direction: column;
@@ -80,24 +89,58 @@ const navLinks = [
     cursor: pointer;
     padding: 4px;
   }
+
   .nav__burger span {
     display: block;
     width: 22px;
     height: 1px;
-    background: white;
+    background: #111;
   }
+
   @media (max-width: 768px) {
     .nav {
       padding: 1.25rem 1.5rem;
+      flex-wrap: wrap;
     }
     .nav__logo-text {
       display: none;
     }
     .nav__links {
       display: none;
+      width: 100%;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      padding: 0.5rem 0 1rem;
+    }
+    .nav__links--open {
+      display: flex;
+    }
+    .nav__link {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
     }
     .nav__burger {
       display: flex;
     }
   }
 </style>
+
+<script>
+  const burger = document.querySelector('.nav__burger');
+  const links = document.querySelector('.nav__links');
+
+  burger?.addEventListener('click', () => {
+    const isOpen = burger.getAttribute('aria-expanded') === 'true';
+    burger.setAttribute('aria-expanded', String(!isOpen));
+    links?.classList.toggle('nav__links--open');
+  });
+
+  // Sluit menu bij klik op link
+  links?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      burger?.setAttribute('aria-expanded', 'false');
+      links.classList.remove('nav__links--open');
+    });
+  });
+</script>

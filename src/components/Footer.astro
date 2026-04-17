@@ -5,21 +5,33 @@
   <div class="footer__top">
     <div class="footer__brand">
       <span class="footer__name">Studio Binnenkant</span>
-      <p class="footer__tagline">Sculpturaal interieurontwerp,<br />architecturaal doordacht.</p>
+      <p class="footer__tagline">Interieurontwerp als architecturaal volume.<br />Van concept tot installatie.</p>
     </div>
     <nav class="footer__nav">
-      <a href="/projecten">Projecten</a>
-      <a href="/over">Over Studio Binnenkant</a>
+      <a href="/">Projecten</a>
+      <a href="/over">Over</a>
+      <a href="/faq">FAQ</a>
       <a href="/contact">Contact</a>
+      <a href="/algemene-voorwaarden" rel="nofollow">Algemene voorwaarden</a>
     </nav>
     <div class="footer__contact">
-      <a href="mailto:info@studio-binnenkant.be">info@studio-binnenkant.be</a>
+      <span>VOF Van de Meersch</span>
+      <span>Kapelstraat 47</span>
+      <span>2880 Bornem</span>
+      <span>BE 0882.341.197</span>
+      <span>info@studio-binnenkant.be</span>
       <a href="https://www.instagram.com/jensvandemeersch" target="_blank" rel="noopener">Instagram</a>
     </div>
   </div>
   <div class="footer__bottom">
-    <span>© Studio Binnenkant 2026 · VOF Van de Meersch · BE 0882.341.197</span>
-    <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
+    <span>© Studio Binnenkant 2026</span>
+  </div>
+  <div class="footer__ai">
+    De inhoud van deze website is beschermd en mag op geen enkele manier worden gebruikt, gekopieerd, gereproduceerd of verspreid
+    <br />zonder expliciete schriftelijke toestemming van Jens Van de Meersch.
+    <br />
+    <br />Text and data mining for the purpose of training artificial intelligence models
+    <br />is explicitly prohibited without prior written consent.
   </div>
 </footer>
 
@@ -82,12 +94,20 @@
     color: #f5f0e8;
   }
 
+  .footer__contact span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    color: rgba(245, 240, 232, 0.55);
+  }
+
   .footer__bottom {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     font-weight: 300;
     letter-spacing: 0.06em;
     color: rgba(245, 240, 232, 0.25);
@@ -103,6 +123,17 @@
 
   .footer__bottom a:hover {
     color: rgba(245, 240, 232, 0.55);
+  }
+
+  .footer__ai {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: rgba(245, 240, 232, 0.15);
+    margin-top: 1rem;
+    line-height: 1.6;
+    text-align: center;
   }
 
   @media (max-width: 768px) {

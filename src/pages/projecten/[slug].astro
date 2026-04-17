@@ -1,104 +1,177 @@
 ---
+import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
-  const sorted = projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
-  return sorted.map((project, index) => ({
+  return projects.map((project) => ({
     params: { slug: project.slug },
-    props: {
-      project,
-      prev: sorted[index + 1] ?? null,
-      next: sorted[index - 1] ?? null,
-    },
+    props: { project },
   }));
 }
 
-const { project, prev, next } = Astro.props;
-const { title, category, image, description, details, gallery, seoTitle, seoDescription } = project.data;
+const { project } = Astro.props;
 const { Content } = await project.render();
+const { title, category, image, description, details, render } = project.data;
 
-const heroImage = image;
-const galleryImages = gallery ?? [image, image, image, image];
-const pageTitle = seoTitle ?? `${title} — Studio Binnenkant`;
-const pageDesc = seoDescription ?? `${title} — sculpturaal interieurontwerp door Studio Binnenkant.`;
+// Haal secties uit markdown body
+const rawContent = project.body;
+const openingszinMatch = rawContent.match(/## Openingszin\s*\n+([^\n#][^\n]+(?:\n(?![#])[^\n]+)*)/);
+const openingszin = openingszinMatch ? openingszinMatch[1].trim() : null;
+
+const omschrijvingMatch = rawContent.match(/## Projectomschrijving\s*\n+([\s\S]*?)(?=\n## |$)/);
+const omschrijving = omschrijvingMatch ? omschrijvingMatch[1].trim() : null;
+
+const specificatiesMatch = rawContent.match(/## Specificaties\s*\n+([\s\S]*?)(?=\n## |$)/);
+const specificatiesRaw = specificatiesMatch ? specificatiesMatch[1].trim() : null;
+// Parse bullet list naar array van {label, value}
+const linksLabels = ['type', 'locatie', 'materialen'];
+const specificatiesRaw2 = specificatiesRaw
+  ? specificatiesRaw.split('\n').filter(l => l.startsWith('-')).map(l => {
+      const clean = l.replace(/^-\s*/, '').replace(/\*\*/g, '');
+      const colonIdx = clean.indexOf(':');
+      return colonIdx > -1
+        ? { label: clean.slice(0, colonIdx).trim(), value: clean.slice(colonIdx + 1).trim() }
+        : { label: '', value: clean };
+    })
+  : [];
+const specsLinks = specificatiesRaw2.filter(s => linksLabels.includes(s.label.toLowerCase()));
+const specsRechts = specificatiesRaw2.filter(s => !linksLabels.includes(s.label.toLowerCase()));
+// Combineer: links dan rechts afwisselend per rij
+const maxRows = Math.max(specsLinks.length, specsRechts.length);
+const specificaties = Array.from({ length: maxRows }, (_, i) => ({
+  left: specsLinks[i] ?? null,
+  right: specsRechts[i] ?? null,
+}));
+
+// Haal de mapnaam en hero-pad op
+const imageFolder = image.split('/')[2];
+const heroImage = `/images/${imageFolder}/hero.webp`;
+
+// Ondersteunt zowel "Label: waarde" strings als {label, value} objecten
+const parsedDetails = details?.map((item: any) => {
+  if (typeof item === 'string') {
+    const colonIndex = item.indexOf(':');
+    return {
+      label: item.slice(0, colonIndex).trim(),
+      value: item.slice(colonIndex + 1).trim(),
+    };
+  }
+  return item;
+}) ?? [];
+
+const allProjects = await getCollection('projects');
+const sorted = allProjects.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+const currentIndex = sorted.findIndex((p) => p.slug === project.slug);
+const prev = sorted[currentIndex + 1] ?? sorted[0];
+const next = currentIndex === 0 ? sorted[sorted.length - 1] : sorted[currentIndex - 1];
 ---
 
-<BaseLayout title={pageTitle} description={pageDesc}>
+<BaseLayout title={title} description={description ?? `${title} – Studio Binnenkant`}>
   <article class="project-detail">
 
-    <!-- Hero: 2 kolommen -->
-    <div class="project-hero">
-      <div class="project-hero__image-wrap">
+    <!-- HERO SECTION: 2 kolommen -->
+    <section class="hero-section">
+      <div class="hero-image">
+        <img src={heroImage} alt={title} width="800" height="1067" loading="eager" />
+      </div>
+      <div class="hero-info">
+        <p class="category">{category}</p>
+        <h1>{title}</h1>
+        {openingszin && <p class="openingszin">{openingszin}</p>}
+        {omschrijving && (
+          <div class="omschrijving">
+            {omschrijving.split(/\n\n+/).map((para: string) => (
+              <p>{para.trim()}</p>
+            ))}
+          </div>
+        )}
+        <!-- SCROLL HINT -->
+        <div class="scroll-hint" id="scrollHint">
+          <span class="scroll-hint__text">Meer foto's</span>
+          <svg class="scroll-hint__arrow" width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="8" y1="0" x2="8" y2="20" stroke="#6b5c45" stroke-width="1"/>
+            <polyline points="2,14 8,22 14,14" stroke="#6b5c45" stroke-width="1" fill="none"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPECS -->
+    {specificaties.length > 0 && (
+      <section class="specs-section">
+        <p class="specs-label">Specificaties</p>
+        <div class="specs-grid">
+          {specificaties.map((row: { left: any; right: any }) => (
+            <>
+              <span class="spec-label">{row.left?.label ?? ''}</span>
+              <span class="spec-value">{row.left?.value ?? ''}</span>
+              <span class="spec-label">{row.right?.label ?? ''}</span>
+              <span class="spec-value">{row.right?.value ?? ''}</span>
+            </>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- RENDER -->
+    {render && (
+      <section class="render-section">
+        <p class="render-label">Ontwerpfase</p>
         <img
-          src={heroImage}
-          alt={title}
-          class="project-hero__image"
-          width="900"
-          height="1200"
-          loading="eager"
-          decoding="async"
+          src={render}
+          alt={`${title} — render`}
+          class="render-image"
+          loading="lazy"
         />
-      </div>
-      <div class="project-hero__info">
-        <div class="project-hero__info-inner">
-          <span class="project-hero__category">{category}</span>
-          <h1 class="project-hero__title">{title}</h1>
-          {description && <p class="project-hero__desc">{description}</p>}
-          {details && details.length > 0 && (
-            <ul class="project-hero__details">
-              {details.map(d => <li>{d}</li>)}
-            </ul>
-          )}
-        </div>
-      </div>
-    </div>
+      </section>
+    )}
 
-    <!-- Bodytekst uit MD -->
-    <div class="project-body">
-      <Content />
-    </div>
-
-    <!-- Gallery: 4 foto's -->
-    <div class="project-gallery">
-      {galleryImages.slice(0, 4).map((img, i) => (
-        <div class="project-gallery__item">
-          <img
-            src={img}
-            alt={`${title} — detail ${i + 1}`}
-            width="900"
-            height="1200"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-      ))}
-    </div>
-
-    <!-- Pager -->
-    <nav class="project-pager" aria-label="Projectnavigatie">
-      <div class="project-pager__inner">
-        {prev ? (
-          <a href={`/projecten/${prev.slug}/`} class="project-pager__link project-pager__link--prev">
-            <span class="project-pager__arrow">←</span>
-            <span class="project-pager__label">
-              <span class="project-pager__hint">Vorig project</span>
-              <span class="project-pager__name">{prev.data.title}</span>
-            </span>
-          </a>
-        ) : <div />}
-        <a href="/" class="project-pager__all">Alle projecten</a>
-        {next ? (
-          <a href={`/projecten/${next.slug}/`} class="project-pager__link project-pager__link--next">
-            <span class="project-pager__label">
-              <span class="project-pager__hint">Volgend project</span>
-              <span class="project-pager__name">{next.data.title}</span>
-            </span>
-            <span class="project-pager__arrow">→</span>
-          </a>
-        ) : <div />}
+    <!-- GALLERY: detail afbeeldingen op basis van image-map -->
+    <section class="gallery-section">
+      <div class="gallery-grid">
+        {[1,2,3,4].map((i) => (
+          <div class="gallery-item">
+            <img
+              src={`/images/${imageFolder}/detail${i}.webp`}
+              alt={`${title} detail ${i}`}
+              width="1200"
+              height="900"
+              loading="lazy"
+              style="width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;"
+            />
+          </div>
+        ))}
       </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <p class="cta-label">Interesse in een gelijkaardig project?</p>
+      <a href="/contact" class="cta-link">Neem contact op</a>
+    </section>
+
+    <!-- PAGER -->
+    <nav class="pager">
+      {prev ? (
+        <a href={`/projecten/${prev.slug}`} class="pager-link prev">
+          <span class="arrow">←</span>
+          <span class="pager-label">
+            <span class="pager-hint">Vorig project</span>
+            <span class="pager-title">{prev.data.title}</span>
+          </span>
+        </a>
+      ) : <div />}
+      <a href="/" class="pager-home">Alle projecten</a>
+      {next ? (
+        <a href={`/projecten/${next.slug}`} class="pager-link next">
+          <span class="pager-label">
+            <span class="pager-hint">Volgend project</span>
+            <span class="pager-title">{next.data.title}</span>
+          </span>
+          <span class="arrow">→</span>
+        </a>
+      ) : <div />}
     </nav>
 
   </article>
@@ -106,225 +179,392 @@ const pageDesc = seoDescription ?? `${title} — sculpturaal interieurontwerp do
 
 <style>
   .project-detail {
-    background: #fff;
-    padding-top: 80px; /* nav clearance */
+    border-top: 1px solid #ccc;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 90px 40px 100px;
   }
 
-  /* ── Hero ── */
-  .project-hero {
+  /* HERO */
+  .hero-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: 90vh;
+    gap: 60px;
+    align-items: start;
+    margin-top: 20px;
+    margin-bottom: 60px;
   }
 
-  .project-hero__image-wrap {
-    overflow: hidden;
-    background: #e8e8e8;
-  }
-
-  .project-hero__image {
+  .hero-image img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
     display: block;
-    aspect-ratio: 3 / 4;
   }
 
-  .project-hero__info {
+  .hero-info {
+    position: sticky;
+    top: 80px;
     display: flex;
-    align-items: center;
-    padding: 60px 60px 60px 70px;
-    background: #fff;
+    flex-direction: column;
+    gap: 20px;
+    align-self: start;
   }
 
-  .project-hero__info-inner {
-    max-width: 480px;
-  }
-
-  .project-hero__category {
-    display: block;
+  .category {
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    font-weight: 300;
+    font-size: 0.72rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: #999;
-    margin-bottom: 1rem;
+    margin: 0;
   }
 
-  .project-hero__title {
+  .hero-info h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 300;
-    line-height: 1.05;
-    color: #111;
-    margin: 0 0 1.5rem;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin: 0;
+    color: #2a2520;
   }
 
-  .project-hero__desc {
+  .openingszin {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #6b5c45;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* SCROLL HINT */
+  .scroll-hint {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 2rem;
+    opacity: 1;
+    transition: opacity 0.6s ease;
+  }
+
+  .scroll-hint.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .scroll-hint__text {
     font-family: 'DM Mono', monospace;
-    font-size: 0.78rem;
+    font-size: 0.62rem;
     font-weight: 300;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+  }
+
+  .scroll-hint__arrow {
+    animation: scrollBounce 1.8s ease-in-out infinite;
+    display: block;
+  }
+
+  @keyframes scrollBounce {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(5px); opacity: 0.4; }
+  }
+
+  /* OMSCHRIJVING naast hero */
+  .omschrijving {
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+  }
+
+  .omschrijving p {
+    font-size: 0.95rem;
     line-height: 1.85;
     color: #555;
-    margin: 0 0 2rem;
+    margin: 0 0 1em;
   }
 
-  .project-hero__details {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    border-top: 1px solid #eee;
-    padding-top: 1.5rem;
+  .omschrijving p:last-child {
+    margin-bottom: 0;
   }
 
-  .project-hero__details li {
+  /* SPECS sectie onder hero */
+  .specs-section {
+    margin-bottom: 80px;
+    border-top: 1px solid #ccc;
+    padding-top: 60px;
+  }
+
+  .specs-label {
     font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    font-weight: 300;
-    color: #888;
-    letter-spacing: 0.04em;
-    padding: 0.35rem 0;
-    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #666;
+    margin: 0 0 20px;
   }
 
-  /* ── Body ── */
-  .project-body {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 60px 40px;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.8rem;
-    font-weight: 300;
-    line-height: 1.9;
-    color: #555;
-  }
-
-  /* ── Gallery ── */
-  .project-gallery {
+  .specs-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 4px;
-    padding: 0 40px 80px;
+    grid-template-columns: 100px 1fr 100px 1fr;
+    gap: 0 60px;
   }
 
-  .project-gallery__item {
-    overflow: hidden;
-    background: #e8e8e8;
-    aspect-ratio: 3 / 4;
+  .spec-row {
+    display: contents;
   }
 
-  .project-gallery__item img {
+  .spec-label {
+    font-family: 'DM Mono', monospace;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.67rem;
+    padding: 8px 0;
+    align-self: baseline;
+  }
+
+  .spec-value {
+    color: #111;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    padding: 8px 0;
+    align-self: baseline;
+  }
+
+  /* RENDER */
+  .render-section {
+    border-top: 1px solid #ccc;
+    padding-top: 60px;
+    margin-bottom: 80px;
+  }
+
+  .render-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #666;
+    margin: 0 0 20px;
+  }
+
+  .render-image {
     width: 100%;
-    height: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* GALLERY */
+  .gallery-section {
+    border-top: 1px solid #ccc;
+    padding-top: 60px;
+    margin-bottom: 80px;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
     display: block;
-    transition: transform 0.5s ease;
   }
 
-  .project-gallery__item:hover img {
-    transform: scale(1.04);
+  /* CTA */
+  .cta-section {
+    border-top: 1px solid #ccc;
+    padding-top: 60px;
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 28px;
   }
 
-  /* ── Pager ── */
-  .project-pager {
-    border-top: 1px solid #eee;
-    padding: 40px;
+  .cta-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: #333;
+    margin: 0;
   }
 
-  .project-pager__inner {
+  .cta-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    background: #111;
+    text-decoration: none;
+    border: 1px solid #111;
+    padding: 14px 28px;
+    transition: all 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .cta-link:hover {
+    background: transparent;
+    color: #111;
+  }
+
+  /* PAGER */
+  .pager {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
+    border-top: 1px solid #ccc;
+    padding-top: 40px;
+    gap: 20px;
   }
 
-  .project-pager__link {
+  .pager-link {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 16px;
     text-decoration: none;
-    color: #111;
+    color: inherit;
     transition: opacity 0.2s;
+    min-height: 44px;
+    padding: 8px 0;
   }
 
-  .project-pager__link:hover {
-    opacity: 0.5;
-  }
+  .pager-link:hover { opacity: 0.6; }
 
-  .project-pager__label {
+  .pager-label {
     display: flex;
     flex-direction: column;
+    gap: 4px;
   }
 
-  .project-pager__hint {
+  .pager-hint {
     font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    font-weight: 300;
+    font-size: 0.7rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #999;
+    color: #aaa;
   }
 
-  .project-pager__name {
+  .pager-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    font-weight: 400;
+    font-size: 1.1rem;
     color: #111;
   }
 
-  .project-pager__arrow {
-    font-size: 1.25rem;
-    color: #999;
-  }
+  .next .pager-label { text-align: right; }
 
-  .project-pager__all {
+  .arrow { font-size: 1.25rem; color: #aaa; }
+
+  .pager-home {
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    font-weight: 300;
+    font-size: 0.72rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #888;
     text-decoration: none;
     border: 1px solid #ddd;
-    padding: 0.5rem 1.2rem;
+    padding: 10px 20px;
     transition: all 0.2s;
+    white-space: nowrap;
   }
 
-  .project-pager__all:hover {
+  .pager-home:hover {
     background: #111;
     color: #fff;
     border-color: #111;
   }
 
-  /* ── Responsive ── */
+  /* RESPONSIVE */
   @media (max-width: 900px) {
-    .project-hero {
+    .project-detail {
+      padding: 80px 24px 80px;
+    }
+    .hero-section {
       grid-template-columns: 1fr;
+      gap: 28px;
+      margin-top: 12px;
+      margin-bottom: 40px;
     }
-    .project-hero__image {
-      aspect-ratio: 4 / 3;
-      height: auto;
+    .hero-info { position: static; }
+    .hero-image img {
+      max-height: 70vw;
+      object-fit: cover;
     }
-    .project-hero__info {
-      padding: 40px 24px;
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
-    .project-gallery {
-      grid-template-columns: repeat(2, 1fr);
-      padding: 0 20px 60px;
+    .specs-grid {
+      grid-template-columns: 90px 1fr;
+      gap: 0 20px;
     }
-    .project-pager {
-      padding: 30px 20px;
+    .specs-section {
+      padding-top: 40px;
+    }
+    .render-section {
+      padding-top: 40px;
+    }
+    .gallery-section {
+      padding-top: 40px;
+    }
+    .cta-section {
+      padding-top: 40px;
+    }
+    .cta-label {
+      font-size: 1.15rem;
+    }
+    .pager {
+      gap: 16px;
+    }
+    .pager-home {
+      padding: 8px 14px;
+      font-size: 0.65rem;
     }
   }
 
-  @media (max-width: 560px) {
-    .project-gallery {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 3px;
+  @media (max-width: 600px) {
+    .project-detail {
+      padding: 72px 16px 60px;
     }
-    .project-body {
-      padding: 40px 20px;
+    .gallery-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .specs-grid {
+      grid-template-columns: 80px 1fr;
+      gap: 0 16px;
+    }
+    .pager {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .pager-home {
+      align-self: center;
+    }
+    .omschrijving p {
+      font-size: 0.88rem;
     }
   }
 </style>
+
+<script>
+  const hint = document.getElementById('scrollHint');
+  if (hint) {
+    const onScroll = () => {
+      if (window.scrollY > 80) {
+        hint.classList.add('hidden');
+        window.removeEventListener('scroll', onScroll);
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>
