@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Bedankt — Studio Binnenkant"
+  description="Bedankt voor je bericht."
+  robots="noindex"
+>
+  <section class="bedankt">
+    <p class="bedankt__label">Bericht ontvangen</p>
+    <h1 class="bedankt__title">Bedankt voor<br /><em>je bericht.</em></h1>
+    <p class="bedankt__sub">Ik neem zo snel mogelijk contact met je op.</p>
+    <a href="/" class="bedankt__cta">Terug naar projecten</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .bedankt {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 120px 2rem;
+    background: #fff;
+  }
+
+  .bedankt__label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #999;
+    margin: 0 0 1.5rem;
+  }
+
+  .bedankt__title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: #111;
+    margin: 0 0 1.5rem;
+  }
+
+  .bedankt__title em {
+    font-style: italic;
+    color: #6b5c45;
+  }
+
+  .bedankt__sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: #999;
+    margin: 0 0 2.5rem;
+  }
+
+  .bedankt__cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    background: #111;
+    text-decoration: none;
+    padding: 0.9rem 1.8rem;
+    transition: background 0.2s;
+  }
+
+  .bedankt__cta:hover {
+    background: #6b5c45;
+  }
+</style>
