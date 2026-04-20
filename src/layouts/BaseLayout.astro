@@ -39,24 +39,8 @@ const { title, description = "Studio Binnenkant — Interieurontwerp als archite
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" /></noscript>
 
-    <!-- Meta Pixel -->
-    <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '1177975397285451');
-      fbq('track', 'PageView');
-    </script>
-    <noscript>
-      <img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=1177975397285451&ev=PageView&noscript=1" />
-    </noscript>
-    <!-- Einde Meta Pixel -->
+    <!-- Hero image preload voor snelle LCP -->
+    <link rel="preload" as="image" href="/images/hero.webp" fetchpriority="high" />
   </head>
   <body>
     <Nav />
@@ -65,5 +49,22 @@ const { title, description = "Studio Binnenkant — Interieurontwerp als archite
     </main>
     <Footer />
     <ImageProtect />
+
+    <!-- Meta Pixel — uitgesteld na page render -->
+    <script>
+      window.addEventListener('load', function() {
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1177975397285451');
+        fbq('track', 'PageView');
+      });
+    </script>
+    <!-- Einde Meta Pixel -->
   </body>
 </html>
