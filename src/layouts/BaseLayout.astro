@@ -36,7 +36,11 @@ const { title, description = "Studio Binnenkant — Interieurontwerp als archite
     <!-- Fonts lokaal gehost via fontsource (geen externe requests) -->
 
     <!-- Hero image preload voor snelle LCP -->
-    <link rel="preload" as="image" href="/images/hero.webp" fetchpriority="high" />
+    <link rel="preload" as="image"
+      href="/images/hero.webp"
+      imagesrcset="/images/hero-mobile.webp 768w, /images/hero.webp 1920w"
+      imagesizes="100vw"
+      fetchpriority="high" />
   </head>
   <body>
     <Nav />
