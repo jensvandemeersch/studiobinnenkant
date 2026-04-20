@@ -155,7 +155,7 @@ const next = currentIndex === 0 ? sorted[sorted.length - 1] : sorted[currentInde
     <nav class="pager">
       {prev ? (
         <a href={`/projecten/${prev.slug}`} class="pager-link prev">
-          <span class="arrow">←</span>
+          <svg class="arrow" width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L1 7m0 0l6 6M1 7h18" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span class="pager-label">
             <span class="pager-hint">Vorig project</span>
             <span class="pager-title">{prev.data.title}</span>
@@ -169,7 +169,7 @@ const next = currentIndex === 0 ? sorted[sorted.length - 1] : sorted[currentInde
             <span class="pager-hint">Volgend project</span>
             <span class="pager-title">{next.data.title}</span>
           </span>
-          <span class="arrow">→</span>
+          <svg class="arrow" width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 1l6 6m0 0l-6 6m6-6H1" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       ) : <div />}
     </nav>
@@ -461,7 +461,11 @@ const next = currentIndex === 0 ? sorted[sorted.length - 1] : sorted[currentInde
 
   .next .pager-label { text-align: right; }
 
-  .arrow { font-size: 1.25rem; color: #aaa; }
+  .arrow {
+    color: #aaa;
+    flex-shrink: 0;
+    display: block;
+  }
 
   .pager-home {
     font-family: 'DM Mono', monospace;
