@@ -97,6 +97,24 @@ const next = currentIndex === 0 ? sorted[sorted.length - 1] : sorted[currentInde
       </div>
     </section>
 
+    <!-- GALLERY: detail afbeeldingen op basis van image-map -->
+    <section class="gallery-section">
+      <div class="gallery-grid">
+        {[1,2,3,4].map((i) => (
+          <div class="gallery-item">
+            <img
+              src={`/images/${imageFolder}/detail${i}.webp`}
+              alt={`${title} detail ${i}`}
+              width="1200"
+              height="900"
+              loading="lazy"
+              style="width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;"
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+
     <!-- SPECS -->
     {specificaties.length > 0 && (
       <section class="specs-section">
@@ -126,24 +144,6 @@ const next = currentIndex === 0 ? sorted[sorted.length - 1] : sorted[currentInde
         />
       </section>
     )}
-
-    <!-- GALLERY: detail afbeeldingen op basis van image-map -->
-    <section class="gallery-section">
-      <div class="gallery-grid">
-        {[1,2,3,4].map((i) => (
-          <div class="gallery-item">
-            <img
-              src={`/images/${imageFolder}/detail${i}.webp`}
-              alt={`${title} detail ${i}`}
-              width="1200"
-              height="900"
-              loading="lazy"
-              style="width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;"
-            />
-          </div>
-        ))}
-      </div>
-    </section>
 
     <!-- CTA -->
     <section class="cta-section">

@@ -1,7 +1,7 @@
 ---
 title: "Keuken Nieuwpoort"
 category: "Keuken"
-image: "/images/keuken-nieuwpoort-TS/card.webp"
+image: "/images/keuken-nieuwpoort-TS/hero.webp"
 date: 2026-01-01
 order: 9
 ---
