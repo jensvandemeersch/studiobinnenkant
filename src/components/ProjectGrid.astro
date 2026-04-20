@@ -25,7 +25,7 @@ const { projects } = Astro.props;
           <img
             src={project.image}
             alt={`${project.title} — Studio Binnenkant`}
-            loading={index < 6 ? 'eager' : 'lazy'}
+            loading="lazy"
             decoding="async"
             width="800"
             height="600"
