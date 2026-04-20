@@ -23,6 +23,13 @@
     </p>
     <a href="/contact" class="hero__cta">Een project bespreken</a>
   </div>
+
+  <a href="#projecten" class="hero__scroll" aria-label="Scroll naar projecten">
+    <span class="hero__scroll-label">Projecten</span>
+    <svg class="hero__scroll-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 4v12M4 10l6 6 6-6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
 </section>
 
 <style>
@@ -115,6 +122,43 @@
     color: #f5f0e8;
   }
 
+  /* Scroll indicator */
+  .hero__scroll {
+    position: absolute;
+    bottom: 2rem;
+    right: 2.5rem;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: rgba(13, 13, 13, 0.45);
+    transition: color 0.25s;
+  }
+
+  .hero__scroll:hover {
+    color: #6b5c45;
+  }
+
+  .hero__scroll-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  .hero__scroll-arrow {
+    animation: scrollBounce 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
   @media (max-width: 768px) {
     .hero {
       padding: 0 1.5rem 3rem;
@@ -136,6 +180,11 @@
       width: 100%;
       text-align: center;
       padding: 1rem;
+    }
+
+    .hero__scroll {
+      right: 1.5rem;
+      bottom: 1.5rem;
     }
   }
 </style>

@@ -538,18 +538,48 @@ const next = currentIndex === 0 ? sorted[sorted.length - 1] : sorted[currentInde
       grid-template-columns: 1fr;
       gap: 12px;
     }
+
+    /* Specs: label als subtitel, waarde eronder */
     .specs-grid {
-      grid-template-columns: 80px 1fr;
-      gap: 0 16px;
+      display: block;
     }
+    .spec-label {
+      display: block;
+      padding: 14px 0 3px;
+      border-top: none;
+      font-size: 0.62rem;
+    }
+    .spec-label:empty { display: none; }
+    .spec-value {
+      display: block;
+      padding: 0 0 4px;
+    }
+    .spec-value:empty { display: none; }
+
+    /* Pager: verticaal gestapeld, prev boven / home midden / next onder */
     .pager {
       flex-direction: column;
-      align-items: flex-start;
-      gap: 20px;
+      align-items: stretch;
+      gap: 0;
+    }
+    .pager-link.prev {
+      order: 1;
+      padding: 16px 0;
+      border-bottom: 1px solid #eee;
     }
     .pager-home {
+      order: 2;
       align-self: center;
+      margin: 20px auto;
     }
+    .pager-link.next {
+      order: 3;
+      justify-content: flex-end;
+      text-align: right;
+      border-top: 1px solid #eee;
+      padding: 16px 0;
+    }
+
     .omschrijving p {
       font-size: 0.88rem;
     }
