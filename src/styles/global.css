@@ -1,3 +1,10 @@
+/* Lokale fonts via fontsource */
+@import '@fontsource/cormorant-garamond/300.css';
+@import '@fontsource/cormorant-garamond/400.css';
+@import '@fontsource/cormorant-garamond/300-italic.css';
+@import '@fontsource/dm-mono/300.css';
+@import '@fontsource/dm-mono/400.css';
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;

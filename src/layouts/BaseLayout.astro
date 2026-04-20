@@ -33,11 +33,7 @@ const { title, description = "Studio Binnenkant — Interieurontwerp als archite
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="canonical" href={Astro.url.href} />
     <title>{title}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" /></noscript>
+    <!-- Fonts lokaal gehost via fontsource (geen externe requests) -->
 
     <!-- Hero image preload voor snelle LCP -->
     <link rel="preload" as="image" href="/images/hero.webp" fetchpriority="high" />
