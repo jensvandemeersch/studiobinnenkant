@@ -146,98 +146,98 @@ declare module 'astro:content' {
   slug: "bureaumeubel-turnhout-bk";
   body: string;
   collection: "projects";
-  data: any
+  data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
 "keuken-borgerhout-AJ.md": {
 	id: "keuken-borgerhout-AJ.md";
   slug: "keuken-borgerhout-aj";
   body: string;
   collection: "projects";
-  data: any
+  data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
 "keuken-gent-FM.md": {
 	id: "keuken-gent-FM.md";
   slug: "keuken-gent-fm";
   body: string;
   collection: "projects";
-  data: any
+  data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
 "keuken-gent-TK.md": {
 	id: "keuken-gent-TK.md";
   slug: "keuken-gent-tk";
   body: string;
   collection: "projects";
-  data: any
+  data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
 "keuken-hove-CA.md": {
 	id: "keuken-hove-CA.md";
   slug: "keuken-hove-ca";
   body: string;
   collection: "projects";
-  data: any
+  data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
 "keuken-koersel-YB.md": {
 	id: "keuken-koersel-YB.md";
   slug: "keuken-koersel-yb";
   body: string;
   collection: "projects";
-  data: any
+  data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
 "keuken-mechelen-PM.md": {
 	id: "keuken-mechelen-PM.md";
   slug: "keuken-mechelen-pm";
   body: string;
   collection: "projects";
-  data: any
+  data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
 "keuken-mechelen-TK.md": {
 	id: "keuken-mechelen-TK.md";
   slug: "keuken-mechelen-tk";
   body: string;
   collection: "projects";
-  data: any
+  data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
 "keuken-nieuwpoort-TS.md": {
 	id: "keuken-nieuwpoort-TS.md";
   slug: "keuken-nieuwpoort-ts";
   body: string;
   collection: "projects";
-  data: any
+  data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
 "keuken-oostende-WA.md": {
 	id: "keuken-oostende-WA.md";
   slug: "keuken-oostende-wa";
   body: string;
   collection: "projects";
-  data: any
+  data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
 "keuken-sint-amandsberg-GD.md": {
 	id: "keuken-sint-amandsberg-GD.md";
   slug: "keuken-sint-amandsberg-gd";
   body: string;
   collection: "projects";
-  data: any
+  data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
 "keuken-zaventem-WA.md": {
 	id: "keuken-zaventem-WA.md";
   slug: "keuken-zaventem-wa";
   body: string;
   collection: "projects";
-  data: any
+  data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
 "room-divider-dendermonde-BJ.md": {
 	id: "room-divider-dendermonde-BJ.md";
   slug: "room-divider-dendermonde-bj";
   body: string;
   collection: "projects";
-  data: any
+  data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"zitmeubel-lichtaart-MB.md": {
-	id: "zitmeubel-lichtaart-MB.md";
-  slug: "zitmeubel-lichtaart-mb";
+"zitmeubel-lichtaart-MD.md": {
+	id: "zitmeubel-lichtaart-MD.md";
+  slug: "zitmeubel-lichtaart-md";
   body: string;
   collection: "projects";
-  data: any
+  data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
 };
 
@@ -249,5 +249,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = never;
+	export type ContentConfig = typeof import("../../src/content/config.js");
 }
