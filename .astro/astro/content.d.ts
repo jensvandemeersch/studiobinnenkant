@@ -232,9 +232,9 @@ declare module 'astro:content' {
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"zitmeubel-lichtaart-MD.md": {
-	id: "zitmeubel-lichtaart-MD.md";
-  slug: "zitmeubel-lichtaart-md";
+"zitmeubel-lichtaart-MB.md": {
+	id: "zitmeubel-lichtaart-MB.md";
+  slug: "zitmeubel-lichtaart-mb";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
