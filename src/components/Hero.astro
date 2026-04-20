@@ -35,7 +35,7 @@
 
 <style>
   .hero {
-    min-height: 100svh;
+    min-height: 88svh;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -179,7 +179,11 @@
     }
 
     .hero__bg {
-      object-position: 35% center;
+      object-position: 35% top;
+    }
+
+    .hero__scroll {
+      display: none;
     }
 
     .hero__sub br {
@@ -196,17 +200,6 @@
       padding: 1rem;
     }
 
-    .hero__scroll {
-      bottom: 1.25rem;
-    }
 
-    .hero__scroll-label {
-      font-size: 0.65rem;
-      opacity: 0.75;
-    }
-
-    .hero__scroll-line {
-      height: 36px;
-    }
   }
 </style>
